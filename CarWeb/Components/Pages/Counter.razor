@@ -1,0 +1,35 @@
+﻿@page "/counter"
+<div style="direction:rtl;text-align:right">
+    @if (drivers == null)
+    {
+        <div class="alert alert-info">در حال بارگذاری...</div>
+    }
+    else if (drivers.Content.Data.Count == 0)
+    {
+        <div class="alert alert-warning">راننده‌ای یافت نشد.</div>
+    }
+    else
+    {
+        <ul class="list-group mb-4" >
+            @foreach (var driver in drivers.Content.Data)
+            {
+                <li class="list-group-item">
+                    <img src="https://test.cobi.ir/images/@driver.ImageProFile" alt="@driver.NameFamily" width="100" class="rounded-circle" />
+                    <h4>@driver.NameFamily</h4>
+                    <p>@driver.Expertise</p>
+                </li>
+            }
+        </ul>
+
+        <div class="d-flex justify-content-between">
+            @if (drivers.Content.HasPrevious)
+            {
+                <button class="btn btn-primary" @onclick="() => LoadPage(drivers.Content.PageIndex -1)">قبلی</button>
+            }
+            @if (drivers.Content.HasNext)
+            {
+                <button class="btn btn-primary" @onclick="() => LoadPage(drivers.Content.PageIndex +1)">بعدی</button>
+            }
+        </div>
+    }
+</div>
